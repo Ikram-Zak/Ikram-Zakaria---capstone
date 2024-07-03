@@ -3,7 +3,6 @@ import requests
 from pprint import pprint
 import pandas as pd
 import numpy as np
-from google.colab import files
 from dotenv import load_dotenv
 import os
 load_dotenv()
@@ -67,13 +66,10 @@ data = list(zip(flight_dates,flight_statuses,flight_number,airline_names,departu
 try:
     cur.executemany(sql, data)
     conn.commit()
-    print('data has been ingested')
 
 except psql.Error as e:
     conn.rollback()
-    print(f"Error inserting data: {e}")
 
 finally:
-    # Close cursor and connection
    cur.close()
    conn.close()
